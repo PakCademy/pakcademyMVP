@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          This code was merged from another branch named "branch_for_blog"
+          Committing after blog component was pushed by another contributor. This version is a previous one.
         </p>
         <a
           className="App-link"
