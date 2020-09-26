@@ -1,0 +1,90 @@
+$py-primary-100: #4285F4;
+$py-primary-80: rgba($py-primary-100, 0.80);
+$py-primary-70: rgba($py-primary-100, 0.70);
+$py-primary-60: rgba($py-primary-100, 0.60);
+$py-primary-30: rgba($py-primary-100, 0.30);
+
+$py-grass-100: #0F9D58;
+$py-grass-80: rgba($py-grass-100, 0.80);
+$py-grass-70: rgba($py-grass-100, 0.70);
+$py-grass-60: rgba($py-grass-100, 0.60);
+$py-grass-30: rgba($py-grass-100, 0.30);
+
+$py-heart-100: #F44242;
+$py-heart-80: rgba($py-heart-100, 0.80);
+$py-heart-70: rgba($py-heart-100, 0.70);
+$py-heart-60: rgba($py-heart-100, 0.60);
+$py-heart-30: rgba($py-heart-100, 0.30);
+
+$py-text-warm-100: #16316C;
+$py-text-warm-80: rgba($py-text-warm-100, 0.80);
+$py-text-warm-70: rgba($py-text-warm-100, 0.70);
+$py-text-warm-60: rgba($py-text-warm-100, 0.60);
+$py-text-warm-30: rgba($py-text-warm-100, 0.30);
+
+$py-text-dark-100: #041C44;
+$py-text-dark-80: rgba($py-text-dark-100, 0.80);
+$py-text-dark-70: rgba($py-text-dark-100, 0.70);
+$py-text-dark-60: rgba($py-text-dark-100, 0.60);
+$py-text-dark-30: rgba($py-text-dark-100, 0.30);
+
+$py-silver-lining-100: #E3E3E3;
+$py-silver-lining-80: rgba($py-silver-lining-100, 0.80);
+$py-silver-lining-70: rgba($py-silver-lining-100, 0.70);
+$py-silver-lining-60: rgba($py-silver-lining-100, 0.60);
+$py-silver-lining-30: rgba($py-silver-lining-100, 0.30);
+
+$py-silver-border-100: #EEEEEE;
+$py-silver-border-80: rgba($py-silver-border-100, 0.80);
+$py-silver-border-70: rgba($py-silver-border-100, 0.70);
+$py-silver-border-60: rgba($py-silver-border-100, 0.60);
+$py-silver-border-30: rgba($py-silver-border-100, 0.30);
+
+$py-silver-text-100: #777777;
+
+$py-text-light-background-100: #FCFCFC;
+$py-text-light-background-80: rgba($py-text-light-background-100, 0.80);
+$py-text-light-background-70: rgba($py-text-light-background-100, 0.70);
+$py-text-light-background-60: rgba($py-text-light-background-100, 0.60);
+$py-text-light-background-30: rgba($py-text-light-background-100, 0.30);
+$py-text-light-background-101p5: darken($py-text-light-background-100, 1.5%);
+$py-text-light-background-102p5: darken($py-text-light-background-100, 2.5%);
+$py-text-light-background-103p5: darken($py-text-light-background-100, 3.5%);
+
+$py-loader-gray-light-100: #f3f3f3;
+
+$py-comment-shadow-24: rgba(#ADAEB2, .24);
+
+$py-white-100: #FFFFFF;
+$py-white-80: rgba($py-white-100, 0.80);
+$py-white-70: rgba($py-white-100, 0.70);
+$py-white-60: rgba($py-white-100, 0.60);
+$py-white-30: rgba($py-white-100, 0.30);
+
+$py-black-100: #000;
+$py-black-80: rgba($py-black-100, 0.80);
+$py-black-70: rgba($py-black-100, 0.70);
+$py-black-60: rgba($py-black-100, 0.60);
+$py-black-30: rgba($py-black-100, 0.30);
+$py-black-24: rgba($py-black-100, 0.24);
+
+$z-10: 10;
+$z-9: 9;
+$z-8: 8;
+$z-7: 7;
+$z-6: 6;
+$z-5: 5;
+$z-4: 4;
+$z-3: 3;
+$z-2: 2;
+$z-1: 1;
+
+$z--1: -1;
+$z--2: -2;
+$z--3: -3;
+$z--4: -4;
+$z--5: -5;
+
+$z-max: $z-10;
+
+$z-nav: $z-max + 100;
