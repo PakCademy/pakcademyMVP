@@ -1,8 +1,25 @@
 import React, { useState } from "react";
 
 import BlogUI from "../BlogUI";
+import CommentsManager from "../../Comments/CommentsManager";
 
 function BlogManager() {
+  const [blogLiked, setBlogLiked] = useState(false);
+
+  const handleBlogLikeToggled = () => {
+    alert("Blog Liked");
+  };
+
+  const [counter, setCounter] = useState(0);
+
+  const handleCommentBoxOpened = () => {
+    setCounter((prevState) => prevState + 1);
+  };
+
+  const handleCommentBoxOpenedStatusChange = (status) => {
+    alert("comment manager responded with status: " + status);
+  };
+
   const [blogConfig, setBlogConfig] = useState({
     header: {
       imageURL:
@@ -11,11 +28,19 @@ function BlogManager() {
       author: "Haysam Tahir",
       createdOn: "09/26/2020",
     },
+    body: {
+      likeToggled: handleBlogLikeToggled,
+      commentBoxOpened: handleCommentBoxOpened,
+    },
   });
 
   return (
     <React.Fragment>
-      <BlogUI blogHeaderConfig={blogConfig.header} />
+      <BlogUI config={blogConfig} />
+      <CommentsManager
+        handleCommentBoxOpenedStatusChange={handleCommentBoxOpenedStatusChange}
+        counter={counter}
+      />
     </React.Fragment>
   );
 }
