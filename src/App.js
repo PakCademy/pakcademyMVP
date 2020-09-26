@@ -8,7 +8,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Committing after blog component was pushed by another contributor. This version is a previous one.
+          Muzamil changed this text...
         </p>
         <a
           className="App-link"
