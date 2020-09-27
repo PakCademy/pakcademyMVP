@@ -1,0 +1,59 @@
+.LatestBlog__Card {
+    background-image: url("https://cdn4.wpbeginner.com/wp-content/uploads/2018/07/whatisblog.png");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    border-radius: 2px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.LatestBlog__Card--Info {
+    width: 42.65%;
+    height: 32%;
+    padding: 20px 20px 20px 0;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    border-radius: 0 130px 0 5px;
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+}
+.LatestBlog__Card--Info-Detail {
+    height: 20%;
+    display: flex;
+    margin: 15px 10px 10px 25px ;
+}
+
+/* .LatestBlog__Card--Info-Detail-Writer {
+    font-weight: bold;
+    font-size: 0.9rem;
+    align-self: center;
+    color: #777777;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+.LatestBlog__Card--Info-Detail-Date {
+    font-weight: bold;
+    font-size: 0.9rem;
+    align-self: center;
+    margin-left: 50px;
+    color: #777777;
+    margin-left: 10px;
+    margin-right: 10px;
+} */
+
+.LatestBlog__Card--Info-Button {
+    height: 10%;
+    background-color: #4285F4;
+    color: #ffffff;
+    padding: 0.5rem 1rem 0.5rem 3rem;
+    font-size: 1.2rem;
+    position: absolute;
+    border-radius: 50px 0 0 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}

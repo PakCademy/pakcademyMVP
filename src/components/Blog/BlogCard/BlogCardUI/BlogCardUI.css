@@ -1,0 +1,101 @@
+.Card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
+    box-sizing: border-box;
+    height: 400px;
+    width: 300px;
+    border-radius: 3px 3px 10% 10%;
+    overflow: hidden;
+    transition: transform .2s linear;
+}
+.Card:hover {
+    transform: scale(1.05);
+}
+.Card__Img {
+    height: 40%;
+    background-size: cover;
+    background-image: url("https://cdn4.wpbeginner.com/wp-content/uploads/2018/07/whatisblog.png");
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.16);
+}
+
+.Card__Content {
+    height: 50%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.Card__Content--Heading {
+    height: 25%;
+    display: flex;
+
+}
+
+.Card__Content--Heading p{
+    text-align: left;
+    font-size: 1.5rem;
+    align-self: center;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.Card__Content--Info {
+    height: 10%;
+    display: flex;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
+    margin-left: 10px;
+}
+/* .Card__Content--Info-Writer {
+    font-weight: bold;
+    font-size: 0.9rem;
+    align-self: center;
+    color: #777777;
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+.Card__Content--Info-Date {
+    font-weight: bold;
+    font-size: 0.9rem;
+    align-self: center;
+    margin-left: 50px;
+    color: #777777;
+    margin-left: 10px;
+    margin-right: 10px;
+} */
+
+.Card__Content--Overview {
+    height: 60%;
+}
+
+.Card__Content--Overview p{
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: left;
+    font-size: 1.4rem;
+    align-self: center;
+    color: #777777;
+}
+
+
+.Card__Button {
+    border: none;
+    background: none;
+    outline: none;
+    height: 10%;
+    width: 100%;
+    align-self: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+    background-color: rgba(6, 133, 244, 0.85);
+    will-change: transform;
+    transition: transform .1s linear;
+    transform-origin: bottom;
+}
+
+.Card__Button:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
