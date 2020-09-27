@@ -1,0 +1,29 @@
+.Blog-List__Container {
+    padding: 1.5em;
+    width: 90%;
+    background-color: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    box-sizing: border-box;
+    justify-content: space-evenly;
+    margin: 2em auto;
+    /* margin: 0em auto; */
+    border: 1px solid #EEEEEE;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.Blog-List__Container--Heading {
+    padding: 0.7em;
+    margin-bottom: 0.6em;
+    height: 20%;
+    align-self: flex-start;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.Blog-List__Container--BlogCards {
+    height: 70%;
+    display: flex;
+    justify-content: space-around;
+}
