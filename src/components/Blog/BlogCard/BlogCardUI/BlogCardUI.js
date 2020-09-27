@@ -1,20 +1,20 @@
 import React from 'react';
+import DotList from '../../../UIWidgets/DotList';
 import './BlogCardUI.css';
 
 const blogCard = (props) => (
     <div className="Card">
-        <div className="Card__Img"></div>
+        <div className="Card__Img" style={{backgroundImage: `url(${props.picture})`}}></div>
         <div className="Card__Content">
             <div className="Card__Content--Heading">
                 <p>{props.title}</p>
             </div>
             <div className="Card__Content--Info">
-                <div className="Card__Content--Info-Writer">Haysam Bin Tahir</div>
-                <div className="Card__Content--Info-Date">{props.postedOn}</div>
+                <DotList items={["Haysam Bin Tahir", props.postedOn]} theme="warm" />
             </div>
             <div className="Card__Content--Overview">
                 <p>
-                    {props.body.substr(0,150) + "..."}
+                    {props.body.substr(0,180) + "..."}
                 </p>
             </div>
         </div>

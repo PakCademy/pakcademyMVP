@@ -5,7 +5,7 @@ import axios from 'axios';
 
 class BlogCardManager extends Component {
     state  = {
-        blogType: 1,
+        blogType: "ISSB RELATED BLOGS",
         blogs: null,
     }
     componentDidMount () {

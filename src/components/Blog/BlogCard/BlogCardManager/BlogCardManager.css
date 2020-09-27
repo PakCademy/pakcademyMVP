@@ -14,12 +14,12 @@
 }
 
 .Blog-List__Container--Heading {
-    padding: 0.7em;
+    padding: 0.9em;
     margin-bottom: 0.6em;
     height: 20%;
     align-self: flex-start;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 2rem;
 }
 
 .Blog-List__Container--BlogCards {
