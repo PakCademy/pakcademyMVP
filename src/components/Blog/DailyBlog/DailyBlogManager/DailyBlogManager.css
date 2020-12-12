@@ -1,0 +1,24 @@
+.daily-blog-manager {
+    display: flex;
+    flex-direction: column;
+    margin: 10rem 0;
+}
+.daily-blog-manager__heading {
+    align-self: flex-end;
+    margin: 5rem 0;
+}
+.daily-blog-manager__heading--text {
+    padding-right: 17rem;
+    font-size: 2rem;
+    color: #63789B;
+    font-weight: normal;
+}
+.daily-blog-manager__heading--line {
+    border-bottom: 1px solid #8B939F;
+    box-shadow: 10px 10px 5px #8B939F;
+}
+.daily-blog-manager__blogs {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}

@@ -6,6 +6,11 @@
     border-radius: 2px;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     position: relative;
+    transition: 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.LatestBlog__Card:hover {
+    transform: scale(1.01);
 }
 
 .LatestBlog__Card--Info {
@@ -19,16 +24,28 @@
     z-index: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
+.LatestBlog__Card--Info-Heading-large {
+    font-size: 3rem;
+    margin: 15px 10px 10px 20px ;
+}
+
+.LatestBlog__Card--Info-Heading-small {
+    font-size: 1.5rem;
+    margin: 0px 5px 0px 20px ;
+}
+
+
 .LatestBlog__Card--Info-Detail {
     height: 20%;
     display: flex;
-    margin: 15px 10px 10px 25px ;
+    margin: 15px 10px 10px 20px ;
 }
 
-/* .LatestBlog__Card--Info-Detail-Writer {
+.LatestBlog__Card--Info-Detail-Writer {
     font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 0.6rem;
     align-self: center;
     color: #777777;
     margin-left: 10px;
@@ -43,7 +60,7 @@
     color: #777777;
     margin-left: 10px;
     margin-right: 10px;
-} */
+}
 
 .LatestBlog__Card--Info-Button {
     height: 10%;
@@ -56,4 +73,11 @@
     right: 0;
     bottom: 0;
     text-align: center;
+    transition: transform .1s linear;
+    transform-origin: bottom right;
+}
+
+.LatestBlog__Card--Info-Button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }

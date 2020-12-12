@@ -3,14 +3,14 @@
     flex-direction: column;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.16);
     box-sizing: border-box;
-    height: 400px;
-    width: 300px;
+    height: 40rem;
+    width: 30rem;
     border-radius: 3px 3px 10% 10%;
     overflow: hidden;
     transition: transform .2s linear;
 }
 .Card:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 .Card__Img {
     height: 40%;
@@ -37,7 +37,7 @@
     font-size: 1.5rem;
     align-self: center;
     font-weight: bold;
-    margin: 0 10px;
+    margin: 0 1rem;
 }
 
 .Card__Content--Info {
@@ -45,34 +45,16 @@
     display: flex;
     margin-bottom: 1rem;
     margin-top: -1rem;
-    margin-left: 10px;
+    margin-left: 1rem;
 }
-/* .Card__Content--Info-Writer {
-    font-weight: bold;
-    font-size: 0.9rem;
-    align-self: center;
-    color: #777777;
-    margin-left: 10px;
-    margin-right: 10px;
-
-}
-.Card__Content--Info-Date {
-    font-weight: bold;
-    font-size: 0.9rem;
-    align-self: center;
-    margin-left: 50px;
-    color: #777777;
-    margin-left: 10px;
-    margin-right: 10px;
-} */
 
 .Card__Content--Overview {
     height: 60%;
 }
 
 .Card__Content--Overview p{
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-left: 1rem;
+    margin-right: 1rem;
     text-align: left;
     font-size: 1.4rem;
     align-self: center;
@@ -82,7 +64,7 @@
 
 .Card__Button {
     border: none;
-    background: none;
+    /*background: none;*/
     outline: none;
     height: 10%;
     width: 100%;
@@ -97,5 +79,5 @@
 
 .Card__Button:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }

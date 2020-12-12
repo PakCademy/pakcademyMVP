@@ -1,0 +1,18 @@
+.allBlogsByTopic__Container {
+    display: flex;
+    flex-direction: column;
+}
+
+.allBlogsByTopic__Container--Heading {
+    text-align: center;
+    margin: 2rem;
+}
+
+.allBlogsByTopic__Container--Blogs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.allBlogsByTopic__Container--Blogs-Blog {
+    margin: 3rem 0.5rem;
+}

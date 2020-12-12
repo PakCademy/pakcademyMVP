@@ -1,0 +1,10 @@
+.header {
+    height: 90vh;
+    margin-top: .2rem;
+}
+.header__image {
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
