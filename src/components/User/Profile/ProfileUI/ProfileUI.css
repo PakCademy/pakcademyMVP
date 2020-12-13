@@ -17,12 +17,31 @@
     height: 12rem;
     width: 12rem;
     border-radius: 50%;
-    background-color: #F44242;
     margin: 2rem auto;
     background-image: url("https://ualr.edu/studentaffairs/files/2020/01/blank-picture-holder.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+.profile__details--content-profile-pic .profile__details--content-profile-pic-change {
+    height: inherit;
+    width: inherit;
+    border-radius: inherit;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+.profile__details--content-profile-pic-change h2 {
+    color: #FFFFFF;
+}
+.profile__details--content-profile-pic input {
+    visibility: hidden;
+}
+.profile__details--content-profile-pic:hover .profile__details--content-profile-pic-change {
+    visibility: visible;
+    cursor: pointer;
 }
 .profile__details--content-username {
     text-align: center;
