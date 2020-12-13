@@ -7,7 +7,7 @@ const ProfilePage = (props) => {
   return (
     <React.Fragment>
       <Navbar active="profile" />
-      <ProfileUI />
+      <ProfileUI {...props} />
       <Footer />
     </React.Fragment>
   );
