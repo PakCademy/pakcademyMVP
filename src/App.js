@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-import BlogCardManager from './components/BlogCard/BlogCardManager/BlogCardManager';
+import BlogManager from "./components/Blog/BlogManager";
 
 function App() {
   return (
     <div className="App">
-      <BlogCardManager />
+      <BlogManager />
     </div>
   );
 }

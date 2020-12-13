@@ -58,6 +58,7 @@ $col-share: $py-grass-100;
           }
           text-align: center;
           border-radius: 0.5rem;
+          transform: scale(1);
           transition: transform 0.075s;
           transition-timing-function: cubic-bezier(0.87, 0.88, 0.72, 1.45);
           position: relative;
@@ -96,7 +97,7 @@ $col-share: $py-grass-100;
           &-stage {
             width: 100%;
             position: absolute;
-            top: 0rem;
+            top: 0;
             transition: top 0.2s ease-out;
 
             &:hover {
@@ -107,7 +108,7 @@ $col-share: $py-grass-100;
               transition: none;
 
               &:hover {
-                top: 0rem;
+                top: 0;
               }
             }
 
