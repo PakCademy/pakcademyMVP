@@ -1,0 +1,34 @@
+.Latest__Blogs {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    height: 60vh;
+}
+.Latest__Blogs--Main-Heading {
+    width: 5%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.Latest__Blogs--Main-Heading p {
+    transform: rotate(-90deg);
+    font-size: 1.5rem;
+    position: absolute;
+    right: 0;
+}
+
+.Latest__Blogs--Main-Blog {
+    height: 100%;
+    width: 60%;
+}
+.Latest__Blogs--Subordinate-Blogs {
+    height: 100%;
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.Latest__Blogs--Subordinate-Blogs-Blog {
+    height: 48%;
+}

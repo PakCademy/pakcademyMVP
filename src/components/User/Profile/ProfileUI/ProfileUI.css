@@ -1,0 +1,84 @@
+.profile {
+    display: flex;
+    /*background-color: #094EC0;*/
+    /*height: 100vh;*/
+}
+.profile__details {
+    flex: 0.25;
+    /*background-color: #F44242;*/
+    display: flex;
+}
+.profile__details--content {
+    display: flex;
+    flex-direction: column;
+    flex: .99;
+}
+.profile__details--content-profile-pic {
+    height: 12rem;
+    width: 12rem;
+    border-radius: 50%;
+    background-color: #F44242;
+    margin: 2rem auto;
+    background-image: url("https://ualr.edu/studentaffairs/files/2020/01/blank-picture-holder.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.profile__details--content-username {
+    text-align: center;
+    font-weight: normal;
+    margin-bottom: 7rem;
+
+}
+.profile__details--content-description {
+    border: 1px solid rgba(0,0,0,0.2);
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0.5rem;
+}
+.profile__details--content-description-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+.profile__details--content-description-header-heading {
+    font-size: 1.5rem;
+}
+.profile__details--content-description-header-edit {
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+.profile__details--content-description-header-edit:hover {
+    color: #4285F4;
+}
+.profile__details--content-description-content {
+    font-size: 1.3rem;
+}
+.profile__details--boundary {
+    border-right: 1px solid rgba(0,0,0,0.08);
+    flex: .1;
+}
+.profile__activity {
+    flex: .75;
+    /*background-color: #0F9D58;*/
+}
+.profile__activity--blogs-heading {
+    text-align: center;
+    margin: 2rem 0;
+}
+.profile__activity--blogs-my-blogs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 5rem;
+}
+.profile__activity--blogs-view {
+    float: right;
+    margin-right: 4.5rem;
+    margin-top: -3rem;
+    font-size: 1.5rem;
+}
+.profile__activity--blogs-view:hover {
+    cursor: pointer;
+    color: #4285F4;
+}

@@ -1,0 +1,24 @@
+.test-card-manager {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20rem;
+}
+.test-card-manager__heading {
+    align-self: flex-start;
+    margin: 5rem 0;
+}
+.test-card-manager__heading--text {
+    padding-left: 17rem;
+    font-size: 2rem;
+    color: #63789B;
+    font-weight: normal;
+}
+.test-card-manager__heading--line {
+    border-bottom: 1px solid #8B939F;
+    box-shadow: 10px 10px 5px #8B939F;
+}
+.test-card-manager__tests {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
