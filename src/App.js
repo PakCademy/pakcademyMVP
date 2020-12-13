@@ -7,12 +7,14 @@ import LoginPage from "./components/Pages/User/LoginPage/LoginPage";
 import HomePage from "./components/Pages/HomePage/HomePage";
 import AllBlogs from "./components/Pages/Blog/AllBlogs/AllBlogs";
 import ProfilePage from "./components/Pages/User/ProfilePage/ProfilePage";
+import Test from "./containers/Test";
 import { Route } from "react-router-dom";
 
 function App(props) {
   return (
     <div className="App">
       {/*<BlogManager />*/}
+      <Route path="/test" exact render={(props) => <Test {...props} />} />
       <Route
         path="/profile"
         exact
