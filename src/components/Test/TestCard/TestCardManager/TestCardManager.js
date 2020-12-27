@@ -50,6 +50,7 @@ class TestCardManager extends Component {
                 color={testCard.color}
                 title={testCard.title}
                 categories={testCard.categories}
+                {...this.props}
               />
             );
           })}

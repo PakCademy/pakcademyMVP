@@ -15,7 +15,7 @@ class BlogCardByTopicManager extends Component {
 
     if (topic === "my-blogs") {
       axios
-        .get("http://localhost:8000/get-my-blogs", {
+        .get("http://localhost:8080/get-my-blogs", {
           headers: authHeader(),
         })
         .then((response) => {
@@ -27,7 +27,7 @@ class BlogCardByTopicManager extends Component {
         });
     } else if (topic === "my-fav-blogs") {
       axios
-        .get("http://localhost:8000/get-fav-articles", {
+        .get("http://localhost:8080/get-fav-articles", {
           headers: authHeader(),
         })
         .then((response) => {
@@ -39,7 +39,7 @@ class BlogCardByTopicManager extends Component {
         });
     } else {
       axios
-        .get("http://localhost:8000/get-articles-by-topic/" + topic)
+        .get("http://localhost:8080/get-articles-by-topic/" + topic)
         .then((response) => {
           this.setState({ blogs: response.data.articles });
         })
@@ -70,6 +70,9 @@ class BlogCardByTopicManager extends Component {
                   picture={blog.PictureSecureId}
                   body={blog.Body}
                   postedOn={blog.PostenOn}
+                  handleClick={() =>
+                    this.props.history.push(`/blog/${blog._id}`)
+                  }
                 />
               </div>
             ))

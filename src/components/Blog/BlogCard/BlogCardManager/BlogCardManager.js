@@ -3,6 +3,7 @@ import "./BlogCardManager.css";
 import BlogCard from "../BlogCardUI/BlogCardUI";
 import axios from "axios";
 import { Skeleton } from "@material-ui/lab";
+import LatestBlogCard from "../../LatestBlogCard/LatestBlogCard/LatestBlogCard";
 
 class BlogCardManager extends Component {
   state = {
@@ -11,7 +12,7 @@ class BlogCardManager extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8000/get-latest-articles/" + this.props.topic)
+      .get("http://localhost:8080/get-latest-articles/" + this.props.topic)
       .then((response) => {
         console.log(response.data.articles);
         this.setState({ blogs: response.data.articles });
@@ -24,6 +25,10 @@ class BlogCardManager extends Component {
   viewAllBlogsByTopicHandler = () => {
     const url = "blogs/" + this.props.topic;
     this.props.history.push(url);
+  };
+
+  handleClick = (blogId) => {
+    this.props.history.push(`/blog/${blogId}`);
   };
 
   render() {
@@ -48,8 +53,10 @@ class BlogCardManager extends Component {
                 id={blog._id}
                 title={blog.Title}
                 picture={blog.PictureSecureId}
+                author={blog.Author}
                 body={blog.Body}
                 postedOn={blog.PostedOn}
+                handleClick={() => this.handleClick(blog._id)}
               />
             ))
           ) : (

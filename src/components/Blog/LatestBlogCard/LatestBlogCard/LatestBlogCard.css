@@ -14,8 +14,8 @@
 }
 
 .LatestBlog__Card--Info {
-    width: 42.65%;
-    height: 32%;
+
+
     padding: 20px 20px 20px 0;
     background: #fff;
     position: absolute;
@@ -63,7 +63,7 @@
 }
 
 .LatestBlog__Card--Info-Button {
-    height: 10%;
+    height: auto;
     background-color: #4285F4;
     color: #ffffff;
     padding: 0.5rem 1rem 0.5rem 3rem;

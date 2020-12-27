@@ -11,7 +11,7 @@ class DailyBlogManager extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8000/get-latest-articles")
+      .get("http://localhost:8080/get-latest-articles")
       .then((response) => {
         console.log("Check");
         this.setState({ blogs: response.data.articles });

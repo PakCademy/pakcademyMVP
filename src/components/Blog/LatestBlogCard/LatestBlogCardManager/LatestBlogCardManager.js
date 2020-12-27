@@ -11,7 +11,7 @@ class LatestBlogCardManager extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8000/get-latest-articles")
+      .get("http://localhost:8080/get-latest-articles")
       .then((response) => {
         console.log(response.data.articles);
         this.setState({ blogs: response.data.articles });
@@ -20,6 +20,11 @@ class LatestBlogCardManager extends Component {
         console.log(error);
       });
   }
+
+  handleClick = (blogId) => {
+    this.props.history.push(`/blog/${blogId}`);
+  };
+
   render() {
     let latestBlogs = this.state.blogs ? (
       <React.Fragment>
@@ -28,7 +33,10 @@ class LatestBlogCardManager extends Component {
             cardSize="large"
             key={this.state.blogs[0]._id}
             title={this.state.blogs[0].Title}
+            author={this.state.blogs[0].Author}
             picture={this.state.blogs[0].PictureSecureId}
+            postedOn={this.state.blogs[0].PostedOn}
+            handleClick={() => this.handleClick(this.state.blogs[0]._id)}
           />
         </div>
         <div className="Latest__Blogs--Subordinate-Blogs">
@@ -37,7 +45,10 @@ class LatestBlogCardManager extends Component {
               cardSize="small"
               key={this.state.blogs[1]._id}
               title={this.state.blogs[1].Title}
+              author={this.state.blogs[1].Author}
               picture={this.state.blogs[1].PictureSecureId}
+              postedOn={this.state.blogs[0].PostedOn}
+              handleClick={() => this.handleClick(this.state.blogs[1]._id)}
             />
           </div>
           <div className="Latest__Blogs--Subordinate-Blogs-Blog">
@@ -45,7 +56,10 @@ class LatestBlogCardManager extends Component {
               cardSize="small"
               key={this.state.blogs[2]._id}
               title={this.state.blogs[2].Title}
+              author={this.state.blogs[2].Author}
               picture={this.state.blogs[2].PictureSecureId}
+              postedOn={this.state.blogs[0].PostedOn}
+              handleClick={() => this.handleClick(this.state.blogs[2]._id)}
             />
           </div>
         </div>

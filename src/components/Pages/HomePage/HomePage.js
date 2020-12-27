@@ -7,13 +7,13 @@ import DailyBlogManager from "../../Blog/DailyBlog/DailyBlogManager/DailyBlogMan
 import TestCardManager from "../../Test/TestCard/TestCardManager/TestCardManager";
 import Footer from "../../Footer/Footer";
 
-const HomePage = () => {
+const HomePage = (props) => {
   return (
     <React.Fragment>
       <Navbar active="home" />
       <HeaderImage />
-      <DailyBlogManager />
-      <TestCardManager />
+      <DailyBlogManager {...props} />
+      <TestCardManager {...props} />
       <Footer />
     </React.Fragment>
   );

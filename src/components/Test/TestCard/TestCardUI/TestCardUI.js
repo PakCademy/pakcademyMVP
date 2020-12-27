@@ -23,6 +23,9 @@ const TestCardUI = (props) => {
       <button
         className="test-card__button"
         style={{ backgroundColor: props.color }}
+        onClick={() => {
+          props.history.push("/test");
+        }}
       >
         EXPLORE
       </button>

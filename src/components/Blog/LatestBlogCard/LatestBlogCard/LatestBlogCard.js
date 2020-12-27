@@ -9,7 +9,13 @@ function LatestBlogCard(props) {
       className="LatestBlog__Card"
       style={{ backgroundImage: `url(${props.picture})` }}
     >
-      <div className="LatestBlog__Card--Info">
+      <div
+        style={{
+          width: props.cardSize == "small" ? "63%" : "42.65%",
+          height: props.cardSize == "small" ? "47%" : "32%",
+        }}
+        className="LatestBlog__Card--Info"
+      >
         <h3
           className={
             props.cardSize == "small"
@@ -22,11 +28,19 @@ function LatestBlogCard(props) {
         <div className="LatestBlog__Card--Info-Detail">
           <DotList
             className="LatestBlog__Card--Info-Detail-Writer"
-            items={["Muzamil Hussain", "27/09/2020"]}
+            items={[
+              props.author.authorName,
+              new Date(props.postedOn).toDateString(),
+            ]}
             theme="warm"
           />
         </div>
-        <div className="LatestBlog__Card--Info-Button">Read full blog</div>
+        <div
+          onClick={props.handleClick}
+          className="LatestBlog__Card--Info-Button"
+        >
+          Read full blog
+        </div>
       </div>
     </div>
   );

@@ -11,16 +11,22 @@ class ProfileUI extends Component {
     myLatestFavBlogs: null,
     myLatestBlogs: null,
     profilePicture: null,
+    description: null,
+    username: null,
   };
 
   componentDidMount() {
+    this.setState({
+      username: JSON.parse(localStorage.getItem("user")).username,
+    });
+
     console.log("auth header = " + authHeader());
     axios
-      .get("http://localhost:8000/get-my-latest-blogs", {
+      .get("http://localhost:8080/get-my-latest-blogs", {
         headers: authHeader(),
       })
       .then((response) => {
-        console.log(response.data.articles);
+        console.log(response.data);
         this.setState({ myLatestBlogs: response.data.articles });
       })
       .catch((error) => {
@@ -28,12 +34,27 @@ class ProfileUI extends Component {
       });
 
     axios
-      .get("http://localhost:8000/get-latest-fav-articles", {
+      .get("http://localhost:8080/get-latest-fav-articles", {
         headers: authHeader(),
       })
       .then((response) => {
         console.log(response.data.favArticles);
         this.setState({ myLatestFavBlogs: response.data.favArticles });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
+      .get("http://localhost:8080/get-profile", {
+        headers: authHeader(),
+      })
+      .then((response) => {
+        console.log(response.data.userProfile);
+        this.setState({
+          profilePicture: response.data.userProfile.ProfilePhotoSecureId,
+          description: response.data.userProfile.PersonalDescription,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -50,6 +71,10 @@ class ProfileUI extends Component {
     this.props.history.push(url);
   };
 
+  handleClick = (blogId) => {
+    this.props.history.push(`/blog/${blogId}`);
+  };
+
   fileSelectedHandler = (event) => {
     this.setState({
       profilePicture: event.target.files[0],
@@ -61,7 +86,7 @@ class ProfileUI extends Component {
         headers: authHeader(),
       })
       .then((response) => {
-        console.log(response);
+        this.setState({ profilePicture: response.data.picture });
       });
   };
   render() {
@@ -69,7 +94,10 @@ class ProfileUI extends Component {
       <div className="profile">
         <div className="profile__details">
           <div className="profile__details--content">
-            <div className="profile__details--content-profile-pic">
+            <div
+              className="profile__details--content-profile-pic"
+              style={{ backgroundImage: `url(${this.state.profilePicture})` }}
+            >
               <label
                 for="upload-image"
                 className="profile__details--content-profile-pic-change"
@@ -83,7 +111,7 @@ class ProfileUI extends Component {
               />
             </div>
             <h1 className="profile__details--content-username">
-              Muzamil Hussain
+              {this.state.username}
             </h1>
             <div className="profile__details--content-description">
               <div className="profile__details--content-description-header">
@@ -126,6 +154,7 @@ class ProfileUI extends Component {
                     picture={blog.PictureSecureId}
                     body={blog.Body}
                     postedOn={blog.PostedOn}
+                    handleClick={() => this.handleClick(blog._id)}
                   />
                 ))
               ) : (
@@ -160,6 +189,7 @@ class ProfileUI extends Component {
                     picture={blog.PictureSecureId}
                     body={blog.Body}
                     postedOn={blog.PostedOn}
+                    handleClick={() => this.handleClick(blog._id)}
                   />
                 ))
               ) : (

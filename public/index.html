@@ -47,5 +47,488 @@
   To begin the development, run `npm start` or `yarn start`.
   To create a production bundle, use `npm run build` or `yarn build`.
 -->
+<script>
+    var title = document.getElementById("title");
+    title.addEventListener("input", updateTitle);
+    function updateTitle(e) {
+        var heading = document.querySelector(".py-formatted-blog-heading--print");
+        if (this.value == "") {
+            heading.innerText = "My Blog Title";
+            return;
+        }
+        heading.innerText = this.value;
+    }
+
+    function killTag(e) {
+        e.parentNode.remove();
+    }
+    function selectTag(e) {
+        e.parentNode.classList.toggle("pbc__tag-holder--highlight");
+    }
+    document.querySelector(".pbc__tag-generator").addEventListener("keydown", manageTag);
+    function manageTag(e) {
+        if (e.key === "Enter" || e.key === "Tab") {
+            e.preventDefault();
+            var maxTags = 5;
+            var tagsCount = document.querySelectorAll(".pbc__tag-holder").length;
+            if (this.value != "" && this.value.length <= 20 && (tagsCount < maxTags)) {
+                var tagValue = this.value;
+                var node = document.createElement("SPAN");
+                node.classList.add("pbc__tag-holder");
+                var tagNode = document.createElement("SPAN");
+                tagNode.classList.add("pbc__tag");
+                var tagTextNode = document.createTextNode(tagValue);
+                tagNode.appendChild(tagTextNode);
+                node.appendChild(tagNode);
+                var tagKillNode = document.createElement("SPAN");
+                tagKillNode.classList.add("pbc__kill");
+                var tagKillIcon = document.createTextNode("X");
+                tagKillNode.appendChild(tagKillIcon);
+                tagKillNode.setAttribute("onclick", "killTag(this)");
+                tagKillNode.setAttribute("onmouseover", "selectTag(this)");
+                tagKillNode.setAttribute("onmouseout", "selectTag(this)");
+                node.appendChild(tagKillNode);
+                this.parentNode.insertBefore(node, this);
+                this.value = "";
+            } else if (tagsCount == maxTags) {
+                alert("Max limit of tags reached");
+            }
+
+        } else if (e.key == "Backspace") {
+            if (this.value == "") {
+                var tags = document.querySelectorAll(".pbc__tag-holder");
+                var tagCount = tags.length;
+                if (tagCount > 0) {
+                    tags[tagCount-1].remove();
+                }
+            }
+        }
+        document.querySelector(".pbc__tag-generator").addEventListener("keydown", manageTag);
+        return;
+    }
+</script>
+<script>
+    const blogId = document.querySelector(".blog").getAttribute("id");
+    var blogCommentBtn = document.querySelector(".blog-actions--act-comment");
+    blogCommentBtn.addEventListener("click", addCommentToBlog);
+
+    var blogLikeBtn = document.querySelector(".blog-actions--act-like");
+    blogLikeBtn.addEventListener("click", likeBlog);
+    var likedIconClass = "fas fa-heart";
+    var unlikedIconClass = "far fa-heart";
+
+    const blogCommentUrl = "https://infinite-oasis-52216.herokuapp.com/comment/add";
+    const commentReplyUrl = "https://infinite-oasis-52216.herokuapp.com/reply/add";
+    const commentDeleteUrl = "https://infinite-oasis-52216.herokuapp.com/comment/delete";
+    const replyDeleteUrl = "https://infinite-oasis-52216.herokuapp.com/reply/delete";
+    const commentEditUrl = "https://infinite-oasis-52216.herokuapp.com/comment/edit";
+    const replyEditUrl = "https://infinite-oasis-52216.herokuapp.com/reply/edit";
+    const commentLikeUrl = "https://infinite-oasis-52216.herokuapp.com/comment/like";
+    const replyLikeUrl = "https://infinite-oasis-52216.herokuapp.com/reply/like";
+    const blogLikeUrl = "https://infinite-oasis-52216.herokuapp.com/blogs/like";
+
+    var commentFormStructure = '<div class="container__comment-main--wrapper comment2Blog"><div class="comment"><div class="comment__meta"><div class="comment__target"><div class="comment__target-pixel"></div></div><div class="comment__actions"><button class="btn btn__primary" onclick="pushComment(this)">Submit</button></div></div><div class="comment__main"><div class="comment__main-pixel"><span class="comment__main-pixel--view" style="background-image:url(./img/actors/hsm__PC.jpg);"></span></div><div class="comment__main-context"><div class="comment__main-context--author"><p class="py-fnt-s--1p6 py-ink--dark py-mg--btm-p5">Haysam Bin Tahir</p></div><div class="comment__main-context--content"><textarea class="comment__add" placeholder="Write your comment here..." ></textarea></div></div></div></div></div>';
+
+    var commentAuthActions = '<div class="comment__auth-actions"><div onclick="editComment(this)" class="comment__auth-actions--act comment__auth-actions--edit py-fnt-s--1p4 py-fnt-w--bold py-ink--silver"><i class="far fa-edit"></i></div><div onclick="deleteComment(this)" class="comment__auth-actions--act comment__auth-actions--delete py-fnt-s--1p4 py-fnt-w--bold py-ink--silver"><i class="far fa-trash-alt"></i></div></div>';
+    var commentActions = '<ul class="py-dot-list py-fnt-s--1p2"><li class="py-dot-list--item py-ink--light hover--ptr" onclick="likeComment(this)">Like</li><li class="py-dot-list--item py-ink--light hover--ptr" onclick="replyComment(this)">Reply</li></ul>';
+    var commentActionsBtn = '<button class="btn btn__primary" onclick="pushComment(this)">Submit</button>';
+    var commentInput = '<textarea class="comment__add" placeholder="Write your comment here..." ></textarea>';
+    var loader = '<div class="loader"></div>';
+    var commentContext = '<p class="py-fnt-s--1p4-I py-ink--silver break"></p>';
+    var commentStats = '<div class="comment__stats"><ul class="py-dot-list py-ink--silver py-fnt-s--1p2"><li class="py-dot-list--item py-ink--silver">0 Likes</li><li class="py-dot-list--item py-ink--silver">0 Replies</li><li class="py-dot-list--item py-ink--light hover--ptr">View Replies</li></ul></div>';
+
+    var commentsParent = document.querySelector(".container__comment-main");
+
+    function likeBlog() {
+        const Url = blogLikeUrl;
+        axiosResult = axios({
+            method: 'post',
+            url: Url,
+            headers: {'Content-Type':'application/json'},
+            data: {
+                userId:"5dbc1c1c1e4bb5482c1ee06c",
+                blogId: blogId
+            }
+        });
+
+        iconNTextHolder = blogLikeBtn.firstElementChild.firstElementChild;
+        likeIcon = iconNTextHolder.firstElementChild;
+        likeText = iconNTextHolder.getElementsByTagName("span")[0];
+        var genText = likeText.innerText.toLowerCase();
+        var iconClass = genText == "like" ? likedIconClass : unlikedIconClass;
+        likeIcon.setAttribute("class", iconClass);
+        if (genText == "like") {
+            likeIcon.classList.add("py-ink--heart-icon");
+        }
+        likeText.classList.toggle("py-ink--heart-icon");
+        likeText.innerText = genText == "like" ? "liked" : "like";
+        axiosResult
+            .then(res => {
+            })
+            .catch(err => {
+                //Uncomment this
+                // likeText.classList.toggle("py-ink--heart-icon");
+                // genText = likeText.innerText.toLowerCase();
+                // iconClass = genText == "liked" ? unlikedIconClass : likedIconClass;
+                // likeIcon.setAttribute("class", iconClass);
+                // if (genText == "liked") {
+                //     likeIcon.classList.remove("py-ink--heart-icon");
+                // }
+                // likeText.innerText = genText == "liked" ? "like" : "liked";
+            })
+
+    }
+
+    function pushComment(e) {
+        var commentContainer = e.parentNode.parentNode.parentNode.parentNode;
+        var commentType = commentContainer.getAttribute("type");
+        const Url = commentType == "comment" ? blogCommentUrl : commentReplyUrl;
+        var forId = commentContainer.getAttribute("for");
+        var replyingToId = commentType == "comment" ? forId : commentContainer.getAttribute("replyingto");
+        pushComment2Destination(e, commentContainer, commentType, Url, "post", forId, replyingToId);
+    }
+
+    function addCommentToBlog() {
+        var forId = document.querySelector(".blog").getAttribute("id");
+        var actionId = forId+"form";
+        var commentForm = document.getElementById(actionId);
+        if(commentForm) {
+            commentForm.firstChild.lastChild.lastChild.lastChild.querySelector("textarea").focus();
+            return;
+        }
+        addCommentForm(commentsParent, "comment", forId, forId, actionId);
+    }
+
+    function replyComment(e) {
+        var commentForm = e.parentNode.parentNode.parentNode.parentNode.parentNode;
+        var commentFormLastChild = commentForm.lastChild;
+        var elementType = commentFormLastChild.getAttribute("class");
+        var destinationContainer = elementType == "comment__replies" ? commentFormLastChild : commentForm.parentNode;
+        console.log(destinationContainer);
+        var forId, actionId;
+        var pixel = commentForm.firstChild.lastChild.firstChild.firstChild;
+        if(commentForm.getAttribute("type") != "comment") {
+            forId = commentForm.parentNode.parentNode.getAttribute("id");
+        } else {
+            forId = commentForm.getAttribute("id");
+        }
+        actionId = commentForm.getAttribute("id")+"form";
+        var replyingToId = commentForm.getAttribute("authorid");
+        var actionElement = document.getElementById(actionId);
+        if(actionElement) {
+            actionElement.firstChild.lastChild.lastChild.lastChild.querySelector("textarea").focus();
+            return;
+        }
+        addCommentForm(destinationContainer, "reply", forId, replyingToId, actionId, pixel);
+    }
+
+    function addCommentForm(replyContainer, commentType, forId, replyingToId, actionId, pixel) {
+        replyContainer.innerHTML += commentFormStructure;
+        var comment2Add = replyContainer.lastChild;
+        if(pixel) {
+            var pixelImg = pixel.getAttribute("style");
+            var targetPixel = comment2Add.firstChild.firstChild.firstChild.getElementsByTagName("div")[0];
+            targetPixel.setAttribute("style", pixelImg);
+
+        }
+        comment2Add.firstChild.lastChild.lastChild.lastChild.lastChild.focus();
+        comment2Add.setAttribute("type", commentType);
+        comment2Add.setAttribute("for", forId);
+        comment2Add.setAttribute("id", actionId);
+        if(commentType == "comment") {
+            comment2Add.setAttribute("replyingto", forId);
+        } else {
+            comment2Add.setAttribute("replyingto", replyingToId);
+        }
+
+    }
+
+
+    function likeComment(e) {
+        e.removeAttribute("onclick");
+        e.innerText = e.innerText=="Like"?"Liked":"Like";
+        e.classList.toggle("py-ink--heart");
+        e.classList.toggle("py-ink--light");
+        var commentForm = e.parentNode.parentNode.parentNode.parentNode.parentNode;
+        var blogId = commentForm.getAttribute("for");
+        var commentType = commentForm.getAttribute("type");
+        var cId = commentForm.getAttribute("id");
+        var commentId = commentType == "comment" ? cId : commentForm.parentNode.parentNode.getAttribute("id");
+        var replyId = commentType == "reply" ? cId : commentId;
+
+        const Url = commentType == "comment" ? commentLikeUrl : replyLikeUrl;
+
+
+        e.setAttribute("onclick", "likeComment(this)");
+        var likeNode = commentForm.querySelector(".comment__stats").firstChild.firstChild;
+        var likeCount = parseInt(likeNode.innerText.split(" ")[0], 10);
+        if(e.innerText == "Liked") {
+            likeCount += 1;
+        } else {
+            likeCount -= 1;
+        }
+        likeNode.innerText = likeCount.toString() + " Likes";
+
+
+
+
+
+        axiosResult = axios({
+            method: 'post',
+            url: Url,
+            headers: {'Content-Type':'application/json'},
+            data: {
+                userId:"5dbc1c1c1e4bb5482c1ee06c",
+                blogId: blogId,
+                commentId: commentId,
+                replyId: replyId
+            }
+        })
+            .then(res=>{
+                e.setAttribute("onclick", "likeComment(this)");
+                var likeNode = commentForm.querySelector(".comment__stats").firstChild.firstChild;
+                var likeCount = parseInt(likeNode.innerText.split(" ")[0], 10);
+                if(e.innerText == "Liked") {
+                    likeCount += 1;
+                } else {
+                    likeCount -= 1;
+                }
+                likeNode.innerText = likeCount.toString() + " Likes";
+                console.log(res.data.feedBack);
+            })
+            .catch(err=> {
+                e.innerText = e.innerText=="Like"?"Liked":"Like";
+                e.classList.toggle("py-ink--heart");
+                e.classList.toggle("py-ink--light");
+                e.setAttribute("onclick", "likeComment(this)");
+            })
+    }
+
+    function deleteComment(e) {
+        e.removeAttribute("onclick");
+        var replyId, commentId;
+        var commentForm = e.parentNode.parentNode.parentNode.parentNode;
+        var type = commentForm.getAttribute("type");
+
+        var forId = commentForm.getAttribute("for");
+        const Url = type == "comment" ? commentDeleteUrl : replyDeleteUrl;
+        if(type == "reply") {
+            replyId = commentForm.getAttribute("id");
+            commentId = commentForm.parentNode.parentNode.getAttribute("id");
+        } else {
+            replyId = commentForm.getAttribute("id");
+            commentId = replyId;
+        }
+        console.log(forId);
+        console.log(replyId);
+        console.log(commentId);
+        commentForm.parentNode.removeChild(commentForm);
+        axios({
+            method: 'delete',
+            url: Url,
+            headers: {'Content-Type':'application/json'},
+            data: {
+                userId:"5dbc1c1c1e4bb5482c1ee06c",
+                blogId:forId,
+                commentId: commentId,
+                replyId: replyId
+            }
+        })
+            .then(res=>{
+                commentForm.parentNode.removeChild(commentForm);
+            })
+            .catch(err=> {
+                e.setAttribute("onclick", "deleteComment(this)");
+                console.log(err);
+            })
+
+    }
+    function editComment(e) {
+        /**
+         * for reply ==> replyId, commentId, userId, updatedText
+         */
+        if (e) {
+            var commentForm = e.parentNode.parentNode.parentNode.parentNode;
+            var authorId = commentForm.getAttribute("authorid");
+            var commentType = commentForm.getAttribute("type");
+            var commentId, replyId;
+            if (commentType == "reply") {
+                commentId = commentForm.parentNode.parentNode.getAttribute("id");
+                replyId = commentForm.getAttribute("id");
+            } else {
+                commentId = commentForm.getAttribute("id");
+                replyId = commentId;
+            }
+            var forId = commentForm.getAttribute("for");
+
+            var commentStats = commentForm.querySelector(".comment__stats");
+            commentForm.removeChild(commentStats);
+
+            var commentMeta = commentForm.querySelector(".comment__meta");
+            var commentFormActions = commentMeta.querySelector(".comment__actions");
+            commentFormActions.innerHTML = commentActionsBtn;
+            editBtn = commentFormActions.getElementsByTagName("button")[0];
+
+            var commentMain = commentForm.querySelector(".comment__main");
+            var commentMainContext = commentMain.querySelector(".comment__main-context");
+            var commentMainContent = commentMainContext.querySelector(".comment__main-context--content");
+            var commentMainContentPara = commentMainContent.getElementsByTagName("p")[0];
+            var oldValue = commentMainContentPara.innerText;
+            commentMainContent.innerHTML = commentInput;
+            var commentEditInput = commentMainContent.getElementsByTagName("textarea")[0];
+            commentEditInput.innerText = oldValue;
+            commentEditInput.focus();
+
+            editBtn.removeAttribute("onclick");
+            editBtn.addEventListener("click", function() {
+                var newValue = commentEditInput.value;
+                const Url = commentType == "comment" ? commentEditUrl : replyEditUrl;
+                var axiosResult = axios({
+                    method: 'put',
+                    url: Url,
+                    headers: {'Content-Type':'application/json'},
+                    data: {
+                        userId:authorId,
+                        blogId:document.querySelector(".blog").getAttribute("id"),
+                        commentId: commentId,
+                        replyId: replyId,
+                        updatedText: newValue
+                    }
+                })
+                commentFormActions.innerHTML = loader;
+
+
+                commentMainContentPara.innerText = newValue;
+                commentMainContent.removeChild(commentEditInput);
+                commentMainContent.appendChild(commentMainContentPara);
+
+
+
+
+                commentFormActions.innerHTML = commentActions;
+                if (commentType == "comment") {
+                    commentForm.insertBefore(commentStats, commentForm.querySelector(".comment__replies"));
+                } else {
+                    commentForm.appendChild(commentStats);
+                }
+
+
+
+
+
+                axiosResult
+                    .then(res => {
+                        commentFormActions.innerHTML = commentActions;
+                        if (commentType == "comment") {
+                            commentForm.insertBefore(commentStats, commentForm.querySelector(".comment__replies"));
+                        } else {
+                            commentForm.appendChild(commentStats);
+                        }
+
+                        console.log(res.data.feedBack);
+                    })
+                    .catch(err => console.log(err))
+
+
+            });
+
+
+
+            console.log(forId);
+        }
+    }
+    function pushComment2Destination(e, commentContainer, commentType, Url, requestMethod, forId, replyingToId) {
+        // var commentBody = document.querySelector(".comment__add").value;
+        var commentBody = commentContainer.firstChild.lastChild.lastChild.lastChild.firstChild.value;
+        console.log(commentBody);
+        var axiosResult = axios({
+            method: requestMethod,
+            url: Url,
+            headers: {'Content-Type':'application/json'},
+            data: {
+                userId:"5dbc1c1c1e4bb5482c1ee06c",
+                blogId: forId,
+                commentId:forId,
+                replyingTo: replyingToId,
+                text:commentBody
+            }
+        })
+        var commentForm = commentContainer;
+        var commentFormOldId = commentForm.getAttribute("id");
+        commentForm.removeAttribute("id");
+        var commentMeta = commentForm.querySelector(".comment__meta");
+        var commentFormActions = commentMeta.querySelector(".comment__actions");
+        commentFormActions.innerHTML = loader;
+
+        var commentMain = commentForm.querySelector(".comment__main");
+        var commentMainContext = commentMain.querySelector(".comment__main-context");
+        var commentMainContent = commentMainContext.querySelector(".comment__main-context--content");
+        commentMainContent.innerHTML = commentContext;
+        var commentContentContainer = commentMainContent.getElementsByTagName("p")[0];
+        commentContentContainer.innerText = commentBody;
+
+
+
+
+
+
+        commentFormActions.innerHTML = commentActions;
+        commentMeta.innerHTML += commentAuthActions;
+        commentFormActions.setAttribute("id", res.data.commentId);
+        commentForm.innerHTML += commentStats;
+        commentForm.setAttribute("id",res.data.commentId);
+        commentForm.setAttribute("authorid","5dbc1c1c1e4bb5482c1ee06c");
+        commentForm.setAttribute("type",commentType);
+        commentForm.setAttribute("for", forId);
+        if (commentType == "comment") {
+            commentForm.innerHTML += '<div class="comment__replies"></div>';
+        } else {
+            var cStat = commentForm.querySelector(".comment__stats").firstChild;
+            cStat.removeChild(cStat.lastChild);
+
+        }
+        commentForm.classList.remove("comment2Blog");
+        console.log(res.data.feedBack);
+
+
+
+
+
+
+
+
+        axiosResult
+            .then(res => {
+                console.log("here", res);
+
+                // commentFormActions.innerHTML = commentActions;
+                // commentMeta.innerHTML += commentAuthActions;
+                // commentFormActions.setAttribute("id", res.data.commentId);
+                // commentForm.innerHTML += commentStats;
+                // commentForm.setAttribute("id",res.data.commentId);
+                // commentForm.setAttribute("authorid","5dbc1c1c1e4bb5482c1ee06c");
+                // commentForm.setAttribute("type",commentType);
+                // commentForm.setAttribute("for", forId);
+                // if (commentType == "comment") {
+                //     commentForm.innerHTML += '<div class="comment__replies"></div>';
+                // } else {
+                //     var cStat = commentForm.querySelector(".comment__stats").firstChild;
+                //     cStat.removeChild(cStat.lastChild);
+
+                // }
+                // commentForm.classList.remove("comment2Blog");
+                // console.log(res.data.feedBack);
+                return res;
+            })
+            .catch(err => {
+                console.log(err);
+                //     commentForm.setAttribute("id", commentFormOldId);
+                //     commentMainContent.innerHTML = commentInput;
+                //     commentMainContent.getElementsByTagName("textarea")[0].value = commentBody;
+                //     commentFormActions.innerHTML = commentActionsBtn;
+                console.log(err.response.statusText);
+            })
+    }
+</script>
 </body>
 </html>
